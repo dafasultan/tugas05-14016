@@ -19,8 +19,11 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'alamat',
+        'no_hp',
         'email',
-        'password',
+        'role',
+        'password'
     ];
 
     /**
@@ -32,6 +35,11 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function periksa()
+    {
+        return $this->hasMany(Periksa::class, 'id_pasien');
+    }
 
     /**
      * Get the attributes that should be cast.

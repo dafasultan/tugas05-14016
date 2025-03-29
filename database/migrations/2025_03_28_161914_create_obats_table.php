@@ -11,9 +11,9 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('obats', function (Blueprint $table) {
-            $table->id(); // Ini udah otomatis bigint unsigned auto_increment & primary key
-            $table->string('nama_obat');
-            $table->string('kemasan')->nullable();
+            $table->id();
+            $table->string('nama_obat', 50);
+            $table->string('kemasan', 35);
             $table->integer('harga');
             $table->timestamps();
         });

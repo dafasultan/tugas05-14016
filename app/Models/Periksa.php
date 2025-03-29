@@ -14,25 +14,20 @@ class Periksa extends Model
 
     protected $table = 'periksa';
 
-    protected $fillable = [
-        'id_pasien',
-        'id_dokter',
-        'tgl_periksa',
-        'catatan',
-        'biaya_periksa',
-    ];
+    protected $fillable = ['id_pasien', 'id_dokter', 'tanggal_periksa', 'catatan', 'biaya'];
 
-    public function pasien(): BelongsTo
+    // Relasi ke USER (pasien & dokter)
+    public function pasien()
     {
         return $this->belongsTo(User::class, 'id_pasien');
     }
-
-    public function dokter(): BelongsTo
+    public function dokter()
     {
         return $this->belongsTo(User::class, 'id_dokter');
     }
 
-    public function detailPeriksa(): HasMany
+    // Relasi ke DETAIL_PERIKSA (resep obat)
+    public function detailPeriksa()
     {
         return $this->hasMany(DetailPeriksa::class, 'id_periksa');
     }

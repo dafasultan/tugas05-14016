@@ -12,13 +12,11 @@ return new class extends Migration {
     {
         Schema::create('periksas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_pasien'); // id_pasien ke tabel users
-            $table->foreign('id_pasien')->references('id')->on('users')->onDelete('cascade'); // Ganti pasien -> users
-            $table->unsignedBigInteger('id_dokter');
-            $table->foreign('id_dokter')->references('id')->on('users')->onDelete('cascade'); // Ganti juga kalo dokter pakai tabel users
-            $table->dateTime('tgl_periksa');
-            $table->text('catatan')->nullable();
-            $table->integer('biaya_periksa');
+            $table->foreignId('id_pasien')->constrained('users', 'id');
+            $table->foreignId('id_dokter')->constrained('users', 'id');
+            $table->dateTime('tanggal_periksa');
+            $table->text('catatan');
+            $table->integer('biaya');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('periksas');
+        Schema::dropIfExists('periksa');
     }
 };

@@ -219,7 +219,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="/pasien/periksa" class="nav-link active">
+                            <a href="/pasien/periksa" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Periksa
@@ -227,7 +227,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/pasien/riwayat" class="nav-link">
+                            <a href="/pasien/riwayat" class="nav-link active">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Riwayat

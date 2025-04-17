@@ -11,9 +11,9 @@ class Obat extends Model
     //
     use HasFactory;
 
-    protected $table = 'obat';
+    protected $table = 'obats';
 
-    protected $fillable = ['nama_obat', 'harga'];
+    protected $fillable = ['nama_obat', 'harga', 'kemasan'];
 
     // Relasi ke DETAIL_PERIKSA
     public function detailPeriksa()

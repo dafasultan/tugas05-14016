@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\ObatController;
+use App\Http\Controllers\PasienController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('admin/adminlte');
+    return view('poliklinik.beranda');
 });
 
 Route::get('/login', function () {
@@ -37,3 +39,7 @@ Route::get('/pasien/periksa', function () {
 Route::get('/pasien/riwayat', function () {
     return view('pasien.riwayat');
 });
+
+
+Route::resource('obat', ObatController::class)->names('obat');
+Route::resource('pasiens', PasienController::class)->names('pasiens');

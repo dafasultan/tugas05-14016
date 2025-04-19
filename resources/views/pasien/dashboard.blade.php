@@ -179,6 +179,15 @@
                         <i class="fas fa-th-large"></i>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <form action="{{ url('/logout') }}" method="POST" style="display: inline;">
+                        @csrf
+                        <button type="submit"
+                            style="background-color: red; color: white; padding: 8px 12px; border: none; border-radius: 4px;">
+                            Logout
+                        </button>
+                    </form>
+                </li>
             </ul>
         </nav>
         <!-- /.navbar -->

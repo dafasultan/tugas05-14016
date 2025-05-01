@@ -220,7 +220,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="/pasien" class="nav-link">
+                                    <a href="/dokter" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Dashboard</p>
                                     </a>
@@ -228,7 +228,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="/pasien/periksa" class="nav-link">
+                            <a href="/dokter/periksa" class="nav-link active">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Periksa
@@ -236,10 +236,10 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/pasien/riwayat" class="nav-link active">
+                            <a href="/dokter/obat" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Riwayat
+                                    Obat
                                 </p>
                             </a>
                         </li>
@@ -272,62 +272,40 @@
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h3 class="card-title">Data Periksa Pasien</h3>
-
-                                    <div class="card-tools">
-                                        <div class="input-group input-group-sm" style="width: 150px;">
-                                            <input type="text" name="table_search" class="form-control float-right"
-                                                placeholder="Search">
-                                            <div class="input-group-append">
-                                                <button type="submit" class="btn btn-default">
-                                                    <i class="fas fa-search"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="card-body table-responsive p-0">
-                                    <table class="table table-hover text-nowrap">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Pasien</th>
-                                                <th>Dokter</th>
-                                                <th>Tanggal Periksa</th>
-                                                <th>Status</th>
-                                                <th>Diagnosa</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($periksas as $periksa)
-                                                <tr>
-                                                    <td>{{ $periksa->id }}</td>
-                                                    <td>{{ $periksa->pasien->name ?? '-' }}</td>
-                                                    <td>{{ $periksa->dokter->name ?? '-' }}</td>
-                                                    <td>{{ $periksa->created_at->format('d-m-Y H:i') }}</td>
-                                                    <td>
-                                                        <span
-                                                            class="tag tag-{{ $periksa->is_selesai ? 'success' : 'warning' }}">
-                                                            {{ $periksa->is_selesai ? 'Selesai' : 'Belum Diperiksa' }}
-                                                        </span>
-                                                    </td>
-                                                    <td>{{ $periksa->hasil_diagnosa ?? '-' }}</td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                            </div>
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Input Diagnosa & Obat</h3>
                         </div>
+
+                        <form action="{{ route('periksas.diagnosaPost', $periksa->id) }}" method="POST">
+                            @csrf
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="hasil_diagnosa">Diagnosa</label>
+                                    <textarea id="hasil_diagnosa" name="hasil_diagnosa" class="form-control" rows="4"
+                                        placeholder="Masukkan diagnosa pasien">{{ old('hasil_diagnosa', $periksa->hasil_diagnosa) }}</textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="obat_id">Pilih Obat</label>
+                                    <select name="obat_id" class="form-control">
+                                        @foreach ($obats as $obat)
+                                            <option value="{{ $obat->id }}" {{ $obat->id == old('obat_id', $periksa->obat_id) ? 'selected' : '' }}>
+                                                {{ $obat->nama_obat }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary">Simpan Diagnosa & Obat</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </section>
+
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->

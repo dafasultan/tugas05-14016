@@ -4,7 +4,7 @@
     <div class="container">
         <h1 class="mb-4">Tambah Pasien</h1>
 
-        <form action="{{ route('pasien.store') }}" method="POST">
+        <form action="{{ route('pasiens.store') }}" method="POST">
             @csrf
 
             <div class="mb-3">
@@ -34,7 +34,7 @@
             <button type="submit" class="btn btn-primary">
                 <i class="bi bi-save"></i> Simpan
             </button>
-            <a href="{{ route('pasien.index') }}" class="btn btn-secondary">
+            <a href="{{ route('pasiens.index') }}" class="btn btn-secondary">
                 <i class="bi bi-arrow-left"></i> Kembali
             </a>
         </form>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dokter | Tabel Periksa</title>
+    <title>Pasien | Tabel Periksa</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -280,36 +280,34 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Periksa</h3>
                                 </div>
-                                <form>
+                                <form method="POST" action="{{ route('pasien.periksa.store') }}">
+                                    @csrf
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label for="inputName">Nama Anda</label>
-                                            <input type="email" class="form-control" id="inputName"
+                                            <input type="text" class="form-control" id="inputName" name="nama"
                                                 placeholder="Input Nama Anda">
                                         </div>
                                         <div class="form-group">
                                             <label>Pilih Dokter</label>
-                                            <select class="form-control select2" style="width: 100%;">
-                                                <option selected="selected">Alabama</option>
-                                                <option>Alaska</option>
-                                                <option>California</option>
-                                                <option>Delaware</option>
-                                                <option>Tennessee</option>
-                                                <option>Texas</option>
-                                                <option>Washington</option>
+                                            <select class="form-control select2" name="dokter_id" style="width: 100%;">
+                                                @foreach ($dokters as $dokter)
+                                                    <option value="{{ $dokter->id }}">{{ $dokter->name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                        <div class="form-group">
+                                            <label for="keluhan">Keluhan</label>
+                                            <textarea class="form-control" id="keluhan" name="keluhan" rows="3"
+                                                placeholder="Tuliskan keluhan anda..."></textarea>
                                         </div>
                                     </div>
-                                    <!-- /.card-body -->
 
                                     <div class="card-footer">
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </div>
                                 </form>
+
                             </div>
                         </div>
                     </div>

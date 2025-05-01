@@ -10,7 +10,7 @@ class ObatController extends Controller
     public function index()
     {
         $obats = Obat::all();
-        return view('obat.index', compact('obats'));
+        return view('dokter.obat', compact('obats'));
     }
 
     public function create()
